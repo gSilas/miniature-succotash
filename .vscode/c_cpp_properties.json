@@ -1,0 +1,41 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "/home/dan/esp/8bkc-sdk/8bkc-components/",
+                    "/home/dan/esp/8bkc-sdk/esp-idf/components/"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "${workspaceFolder}",
+                "/home/dan/esp/8bkc-sdk/8bkc-components/",
+                "/home/dan/esp/8bkc-sdk/esp-idf/components/",
+                "/home/dan/esp/8bkc-sdk/8bkc-components/appfs/include",
+                "/home/dan/esp/8bkc-sdk/8bkc-components/mkappfs/src/partemu",
+                "/home/dan/esp/8bkc-sdk/8bkc-components/8bkc-hal/include",
+                "/home/dan/esp/8bkc-sdk/esp-idf/components/nvs_flash/include",
+                "/home/dan/esp/8bkc-sdk/8bkc-components/ugui/UGUI",
+                "/home/dan/esp/8bkc-sdk/esp-idf/components/freertos/include",
+                "/home/dan/esp/8bkc-sdk/8bkc-components/ugui",
+                "/home/dan/esp/8bkc-sdk/esp-idf/components/esp32/include",
+                "/home/dan/esp/8bkc-sdk/8bkc-components/tilegfx",
+                "/home/dan/esp/8bkc-sdk/8bkc-components/powerbtn_menu",
+                "/home/dan/esp/8bkc-sdk/8bkc-components/sndmixer",
+                "/home/dan/esp/8bkc-sdk/esp-idf/components/soc/esp32/include",
+                "/home/dan/esp/8bkc-sdk/esp-idf/components/nvs_flash/test_nvs_host",
+                "/home/dan/esp/8bkc-sdk/esp-idf/components/heap/include",
+                "/home/dan/esp/8bkc-sdk/esp-idf/components/soc/include"
+            ],
+            "defines": [],
+            "compilerPath": "/opt/cuda/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
