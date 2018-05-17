@@ -1,2 +1,2 @@
-Kenney Shooting Gallery
-http://kenney.nl/assets/shooting-gallery
+Game Icons
+http://kenney.nl/assets/game-icons
