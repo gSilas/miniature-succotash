@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="4" height="8" tilewidth="8" tileheight="8" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" source="running_man_spritesheet.tsx"/>
+ <layer name="Tile Layer 1" width="4" height="8">
+  <data encoding="csv">
+13,14,15,16,
+29,30,31,32,
+45,46,47,48,
+61,62,63,64,
+77,78,79,80,
+93,94,95,96,
+109,110,111,112,
+125,126,127,128
+</data>
+ </layer>
+</map>

@@ -1,4 +1,9 @@
 {
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "tilegfx.h": "c",
+        "esp_timer.h": "c",
+        "chrono": "c"
+    }
 }
