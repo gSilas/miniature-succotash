@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="4" height="4" tilewidth="8" tileheight="8" infinite="0" nextobjectid="1">
- <tileset firstgid="1" source="sheet.tsx"/>
+ <tileset firstgid="1" source="spritesheet.tsx"/>
  <layer name="Tile Layer 1" width="4" height="4">
   <data encoding="csv">
-69,70,71,72,
-85,86,87,88,
-101,102,103,104,
-117,118,119,120
+261,262,263,264,
+293,294,295,296,
+325,326,327,328,
+357,358,359,360
 </data>
  </layer>
 </map>
