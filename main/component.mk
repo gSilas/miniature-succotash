@@ -14,7 +14,7 @@ $(eval $(call ConvertTiles,$(GFX_TILE_FILES),graphics))
 
 # Because we use the ConvertTiles macro, we need to tell the make system which other objects
 # to compile manually.
-COMPONENT_OBJS += app_main.o
+COMPONENT_OBJS += app_main.o obstacles.o
 
 # The wave files get embedded as binary files.
 #COMPONENT_EMBED_FILES := sound/slap.wav sound/whoosh.wav

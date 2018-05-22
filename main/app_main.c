@@ -19,8 +19,9 @@
 #include <math.h>
 #include "powerbtn_menu.h"
 #include "graphics.h"
+#include "obstacles.h"
 
-#define REFRESH_RATE (50)
+#define REFRESH_RATE (999999)
 
 #define SCREEN_W (160)
 #define SCREEN_H (128)
@@ -31,8 +32,8 @@
 #define PLAYER_W (32)
 #define PLAYER_H (64)
 
-#define INPUT_W (32)
-#define INPUT_H (32)
+#define SYMBOL_W (32)
+#define SYMBOL_H (32)
 
 #define OBSTACLE_W (32)
 #define OBSTACLE_H (32) 
@@ -71,18 +72,22 @@ void app_main() {
 	esp_timer_handle_t tile_switch_timer;
 	esp_timer_create(&tile_switch_timer_args, &tile_switch_timer);
 
-	tilegfx_rect_t input_trect={.h=INPUT_H, .w=INPUT_W, .x=0, .y=0};
-	tilegfx_rect_t playstate_trect={.h=INPUT_H, .w=INPUT_W, .x=SCREEN_W-INPUT_W, .y=0};
+	tilegfx_rect_t input_trect={.h=SYMBOL_H, .w=SYMBOL_W, .x=0, .y=0};
+	tilegfx_rect_t input_2_trect={.h=SYMBOL_H, .w=SYMBOL_W, .x=SYMBOL_W, .y=0};
+	tilegfx_rect_t input_3_trect={.h=SYMBOL_H, .w=SYMBOL_W, .x=SYMBOL_W*2, .y=0};
+
+	tilegfx_rect_t playstate_trect={.h=SYMBOL_H, .w=SYMBOL_W, .x=SCREEN_W-SYMBOL_W, .y=0};
 	tilegfx_rect_t player_trect={.h=PLAYER_H, .w=PLAYER_W, .x=(SCREEN_W-PLAYER_W)/4, .y=SCREEN_H - PLAYER_H};
-	tilegfx_rect_t press_start_trect={.h=INPUT_H, .w=INPUT_W*3, .x=(SCREEN_W-INPUT_W)/2, .y=(SCREEN_H - INPUT_H)/2};
+	tilegfx_rect_t press_start_trect={.h=SYMBOL_H, .w=SYMBOL_W*3, .x=(SCREEN_W-SYMBOL_W)/2, .y=(SCREEN_H - SYMBOL_H)/2};
 	tilegfx_rect_t obstacle_1_trect={.h=OBSTACLE_H, .w=OBSTACLE_W, .x=0, .y=(SCREEN_H-OBSTACLE_H)};
-	tilegfx_rect_t obstacle_2_trect={.h=OBSTACLE_H, .w=OBSTACLE_W, .x=(SCREEN_W-OBSTACLE_W), .y=(SCREEN_H-OBSTACLE_H)};
+	tilegfx_rect_t obstacle_2_trect={.h=OBSTACLE_H, .w=OBSTACLE_W, .x=SCREEN_W, .y=(SCREEN_H-OBSTACLE_H)};
 
 	const tilegfx_map_t* render_btn_map = &map_a_btn_Tile_Layer_1;
+	const tilegfx_map_t* render_btn_2_map = &map_a_btn_Tile_Layer_1;
+	const tilegfx_map_t* render_btn_3_map = &map_a_btn_Tile_Layer_1;
 	const tilegfx_map_t* render_playstate_map = &map_start_btn_pause_Tile_Layer_1;
 	const tilegfx_map_t* render_player_map = &map_running_man_idle_1_Tile_Layer_1;
-	const tilegfx_map_t* render_obstacle_1_map = &map_barrel_red_Tile_Layer_1;
-	const tilegfx_map_t* render_obstacle_2_map = &map_barrel_green_Tile_Layer_1;
+	const Obstacle* obstacles[NUM_OBSTACLES] = {&red_barrel_obstacle, &green_barrel_obstacle, &blue_barrel_obstacle};
 
 	esp_timer_start_periodic(tile_switch_timer, FRAME_DELAY_USEC);
 
@@ -148,6 +153,16 @@ void app_main() {
 			}
 		}
 
+		obstacle_1_trect.x -= 1;
+		obstacle_2_trect.x -= 1;
+
+		if(obstacle_1_trect.x < -(OBSTACLE_W+SCREEN_W)){
+			obstacle_1_trect.x = SCREEN_W;
+		}
+		if(obstacle_2_trect.x < -(OBSTACLE_W+SCREEN_W)){
+			obstacle_2_trect.x = SCREEN_W;
+		}
+
 		if(animate_tile(true)){
 			render_player_map = &map_running_man_run_1_Tile_Layer_1;
 		} 
@@ -156,11 +171,22 @@ void app_main() {
 		} 
 
 		tilegfx_fade(255, 255, 255, 0);
-		tilegfx_tile_map_render(render_btn_map, 0, 0, &input_trect);
+
+		//PATTERN
+		tilegfx_tile_map_render(obstacles[0]->patterns[0], 0, 0, &input_trect);
+		tilegfx_tile_map_render(obstacles[0]->patterns[1], 0, 0, &input_2_trect);
+		tilegfx_tile_map_render(obstacles[0]->patterns[2], 0, 0, &input_3_trect);
+
+		//GAMESTATE
 		tilegfx_tile_map_render(render_playstate_map, 0, 0, &playstate_trect);
+
+		//PLAYER
 		tilegfx_tile_map_render(render_player_map, 0, 0, &player_trect);
-		tilegfx_tile_map_render(render_obstacle_1_map, 0, 0, &obstacle_1_trect);
-		tilegfx_tile_map_render(render_obstacle_2_map, 0, 0, &obstacle_2_trect);
+
+		// OBSTACLES
+		tilegfx_tile_map_render(obstacles[0]->tile_map, 0, 0, &obstacle_1_trect);
+		tilegfx_tile_map_render(obstacles[1]->tile_map, 0, 0, &obstacle_2_trect);
+
 		tilegfx_flush();
 	}
 }

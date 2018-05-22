@@ -4,6 +4,8 @@
     "files.associations": {
         "tilegfx.h": "c",
         "esp_timer.h": "c",
-        "chrono": "c"
+        "chrono": "c",
+        "8bkc-hal.h": "c",
+        "esp_log.h": "c"
     }
 }
